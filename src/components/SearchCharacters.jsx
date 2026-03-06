@@ -1,39 +1,13 @@
-import ReloadIcon from "../icons/ReloadIcon";
-import SearchIcon from "../icons/SearchIcon";
-import { useCharacters, setName, setUrlPage } from "../store/characters";
-import styles from "../styles/character-catalog.module.css";
-import Button from "./Button";
+import { useCharacters } from "../store/characters";
+import SearchApiCharacters from "./SearchApiCharacters";
+import SearchFavoritesCharacters from "./SearchFavoritesCharacters";
 
 export default function SearchCharacters() {
-  const name = useCharacters((state) => state.name);
-  const urlPage = useCharacters((state) => state.urlPage);
+  const isActive = useCharacters((state) => state.isActive);
 
-  return (
-    <div className={styles["search-container"]}>
-      <div className={styles["search-field"]}>
-        <SearchIcon className={styles["search-icon"]} />
+  if (isActive) {
+    return <SearchFavoritesCharacters />;
+  }
 
-        <input
-          type={"text"}
-          className={styles["input-search"]}
-          placeholder={"Search by name or type..."}
-          value={name}
-          onChange={(e) => {
-            if (urlPage > 1) setUrlPage(1);
-            setName(e.target.value);
-          }}
-        />
-      </div>
-
-      <Button
-        disabled={name === "" ? true : false}
-        btnClassName={name === "" ? styles["reset-btn-disabled"] : styles["reset-btn"]}
-        Icon={ReloadIcon}
-        onClick={() => {
-          if (urlPage > 1) setUrlPage(1);
-          setName("");
-        }}
-      />
-    </div>
-  );
+  return <SearchApiCharacters />;
 }
