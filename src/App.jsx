@@ -4,15 +4,12 @@ import InfoCharacters from "./components/InfoCharacters";
 import SearchCharacters from "./components/SearchCharacters";
 import SortingCharacters from "./components/SortingCharacters";
 import ActiveCard from "./components/ActiveCard";
-import SortingFavoritesCharacters from "./components/SortingFavoritesCharacters";
-import SearchFavoritesCharacters from "./components/SearchFavoritesCharacters";
 import { useCharacters } from "./store/characters";
 import Pagination from "./components/Pagination";
 import CharactersList from "./components/CharactersList";
 
 export default function RickMortyCharacterCatalog() {
   const activeCard = useCharacters((state) => state.activeCard);
-  const isActive = useCharacters((state) => state.isActive);
 
   return (
     <div className={styles[`app_character-catalog`]}>
@@ -24,16 +21,12 @@ export default function RickMortyCharacterCatalog() {
         className={activeCard === null ? styles["app_main-container-active-card-hidden"] : styles["app_main-container"]}
       >
         <InfoCharacters />
-
-        {isActive ? <SearchFavoritesCharacters /> : <SearchCharacters />}
-
-        {isActive ? <SortingFavoritesCharacters /> : <SortingCharacters />}
-
+        <SearchCharacters />
+        <SortingCharacters />
         <CharactersList />
       </main>
 
       <ActiveCard />
-
       <Pagination />
     </div>
   );
