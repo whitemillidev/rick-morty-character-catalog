@@ -1,15 +1,12 @@
 import ReloadIcon from "../icons/ReloadIcon";
 import SearchIcon from "../icons/SearchIcon";
-import { useCharacters } from "../store/characters";
+import { useCharacters, setName, setUrlPage } from "../store/characters";
 import styles from "../styles/character-catalog.module.css";
 import Button from "./Button";
 
 export default function SearchCharacters() {
-  const { name } = useCharacters((state) => state.filters);
-
+  const name = useCharacters((state) => state.name);
   const urlPage = useCharacters((state) => state.urlPage);
-  const setUrlPage = useCharacters((state) => state.setUrlPage);
-  const setFilter = useCharacters((state) => state.setFilter);
 
   return (
     <div className={styles["search-container"]}>
@@ -22,10 +19,8 @@ export default function SearchCharacters() {
           placeholder={"Search by name or type..."}
           value={name}
           onChange={(e) => {
-            if (urlPage > 1) {
-              setUrlPage(1);
-            }
-            setFilter("name", e.target.value);
+            if (urlPage > 1) setUrlPage(1);
+            setName(e.target.value);
           }}
         />
       </div>
@@ -35,10 +30,8 @@ export default function SearchCharacters() {
         btnClassName={name === "" ? styles["reset-btn-disabled"] : styles["reset-btn"]}
         Icon={ReloadIcon}
         onClick={() => {
-          if (urlPage > 1) {
-            setUrlPage(1);
-          }
-          setFilter("name", "");
+          if (urlPage > 1) setUrlPage(1);
+          setName("");
         }}
       />
     </div>

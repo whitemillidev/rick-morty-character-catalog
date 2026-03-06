@@ -1,32 +1,41 @@
 import styles from "../styles/character-catalog.module.css";
 import StarIcon from "../icons/StarIcon";
 import Button from "./Button";
-import { useFavoriteCharacters } from "../store/favoritesCharacters";
+import { setFavoritesCharacters, useFavoriteCharacters } from "../store/favoritesCharacters";
+import { useCharacters, setActiveCard } from "../store/characters";
 
-export default function CharactersCard({
-  character,
-  handleFavoriteClick,
-  handleActiveCard,
-}) {
+export default function CharactersCard({ character }) {
+  const characters = useCharacters((state) => state.characters);
   const status = character.status.toLowerCase();
   const favoritesCharacters = useFavoriteCharacters((state) => state.favoritesCharacters);
   const isFavorite = favoritesCharacters.some((favChar) => favChar.id === character.id);
+  const activeCard = useCharacters((state) => state.activeCard);
+
+  function handleActiveCard(id) {
+    if (activeCard?.id === id) {
+      setActiveCard(null);
+      return;
+    }
+    setActiveCard(characters.find((char) => char.id === id));
+  }
+
+  function handleFavoriteClick(id) {
+    if (!isFavorite) {
+      setFavoritesCharacters([...favoritesCharacters, character]);
+      return;
+    }
+    setFavoritesCharacters(favoritesCharacters.filter((favChar) => favChar.id !== id));
+  }
 
   return (
-    <div
-      key={character.id}
-      className={styles["characters-card"]}
-      onClick={() => handleActiveCard(character.id)}
-    >
+    <div key={character.id} className={styles["characters-card"]} onClick={() => handleActiveCard(character.id)}>
       <img className={styles["character-card-image"]} src={character.image} />
 
       <Button
         btnClassName={styles["character-card_btn-favorites"]}
         Icon={StarIcon}
         iconClassName={
-          isFavorite
-            ? styles["character-card_icon-favorites-active"]
-            : styles["character-card_icon-favorites"]
+          isFavorite ? styles["character-card_icon-favorites-active"] : styles["character-card_icon-favorites"]
         }
         iconProps={{ filled: isFavorite, colorFilled: "#57cb60" }}
         onClick={(e) => {

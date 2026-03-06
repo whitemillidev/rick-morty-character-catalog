@@ -1,13 +1,12 @@
 import ReloadIcon from "../icons/ReloadIcon";
 import SearchIcon from "../icons/SearchIcon";
-import { useFavCharacterFilters } from "../store/favCharacterFilters";
+import { useFavoriteCharacters, setFavCharFilter, setNameFavChar } from "../store/favoritesCharacters";
 import { useCharacters } from "../store/characters";
 import styles from "../styles/character-catalog.module.css";
 import Button from "./Button";
 
 export default function SearchFavoritesCharacters() {
-  const { nameFavChar } = useFavCharacterFilters((state) => state.favCharFilters);
-  const setFavCharFilter = useFavCharacterFilters((state) => state.setFavCharFilter);
+  const nameFavChar = useFavoriteCharacters((state) => state.nameFavChar);
   const urlPage = useCharacters((state) => state.urlPage);
   const setUrlPage = useCharacters((state) => state.setUrlPage);
 
@@ -20,24 +19,20 @@ export default function SearchFavoritesCharacters() {
           type={"text"}
           className={styles["input-search"]}
           placeholder={"Search by name or type..."}
-          value={nameFavChar}
+          value={nameFavChar || ""}
           onChange={(e) => {
-            setFavCharFilter("nameFavChar", e.target.value);
+            setNameFavChar(e.target.value);
           }}
         />
       </div>
 
       <Button
         disabled={nameFavChar === "" ? true : false}
-        btnClassName={
-          nameFavChar === "" ? styles["reset-btn-disabled"] : styles["reset-btn"]
-        }
+        btnClassName={nameFavChar === "" ? styles["reset-btn-disabled"] : styles["reset-btn"]}
         Icon={ReloadIcon}
         onClick={() => {
-          if (urlPage > 1) {
-            setUrlPage(1);
-          }
-          setFavCharFilter("nameFavChar", "");
+          if (urlPage > 1) setUrlPage(1);
+          setNameFavChar("");
         }}
       />
     </div>

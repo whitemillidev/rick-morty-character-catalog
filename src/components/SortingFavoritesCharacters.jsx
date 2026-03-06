@@ -3,40 +3,15 @@ import SelectItem from "./SelectItem";
 import StarIcon from "../icons/StarIcon";
 import Button from "./Button";
 import ReloadIcon from "../icons/ReloadIcon";
-import { useFavCharacterFilters } from "../store/favCharacterFilters";
-import { useIsActive } from "../store/isActive";
+import { useFavoriteCharacters, setFavCharFilter, resetFilters } from "../store/favoritesCharacters";
+import { statusOptions, genderOptions, speciesOptions, sortingOptions } from "../store/favoritesCharacters";
+import { useCharacters, setIsActive } from "../store/characters";
 
 export default function SortingFavoritesCharacters() {
-  function handleFavoritesResetFilters() {
-    setFavCharFilter("favCharStatus", "All status");
-    setFavCharFilter("favCharGender", "All gender");
-    setFavCharFilter("favCharSpecies", "All species");
-    setFavCharFilter("favCharSorting", "Without sorting");
-  }
-
-  const isActive = useIsActive((state) => state.isActive);
-  const setIsActive = useIsActive((state) => state.setIsActive);
-
-  const { favCharStatus, favCharGender, favCharSpecies, favCharSorting } =
-    useFavCharacterFilters((state) => state.favCharFilters);
-  const setFavCharFilter = useFavCharacterFilters((state) => state.setFavCharFilter);
-
-  const statusOptions = ["All status", "Alive", "Dead", "unknown"];
-  const genderOptions = ["All gender", "Male", "Female", "Genderless", "unknown"];
-  const speciesOptions = [
-    "All species",
-    "Human",
-    "Alien",
-    "Humanoid",
-    "Poopybutthole",
-    "Mythological Creature",
-    "Animal",
-    "Robot",
-    "Cronenberg",
-    "Disease",
-    "unknown",
-  ];
-  const sortingOptions = ["Without sorting", "Name A-Z", "Name Z-A"];
+  const isActive = useCharacters((state) => state.isActive);
+  const { favCharStatus, favCharGender, favCharSpecies, favCharSorting } = useFavoriteCharacters(
+    (state) => state.favCharFilters,
+  );
 
   return (
     <div className={styles["select-container_sorting-characters"]}>
@@ -88,7 +63,7 @@ export default function SortingFavoritesCharacters() {
         btnClassName={styles["btn-reset-filters"]}
         Icon={ReloadIcon}
         iconClassName={styles["icon-reset"]}
-        onClick={handleFavoritesResetFilters}
+        onClick={resetFilters}
       >
         Reset filters
       </Button>
