@@ -34,6 +34,23 @@ export const useFavoriteCharacters = create(() => ({
   favCharFilters: defFavCharFilters,
 }));
 
+export function filteredFavChar(favoritesCharacters, filters, nameFavChar) {
+  const { favCharStatus, favCharGender, favCharSpecies, favCharSorting } = filters;
+
+  return favoritesCharacters
+    .filter((char) => char.name.toLowerCase().includes(nameFavChar.toLowerCase()))
+    .filter((char) => (favCharStatus === "All status" ? true : char.status === favCharStatus))
+    .filter((char) => (favCharGender === "All gender" ? true : char.gender === favCharGender))
+    .filter((char) => (favCharSpecies === "All species" ? true : char.species === favCharSpecies))
+    .toSorted((a, b) =>
+      favCharSorting === "Without sorting"
+        ? 0
+        : favCharSorting === "Name A-Z"
+          ? a.name.localeCompare(b.name)
+          : b.name.localeCompare(a.name),
+    );
+}
+
 export function setNameFavChar(nameFavChar) {
   useFavoriteCharacters.setState({ nameFavChar });
 }

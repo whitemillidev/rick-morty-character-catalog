@@ -59,6 +59,7 @@ export function setName(name) {
 
   if (timerId) {
     clearTimeout(timerId);
+    useCharacters.setState({ timerId: null });
   }
 
   const newTimerId = setTimeout(() => {
@@ -108,9 +109,7 @@ export async function getCharacters() {
   const responses = await Promise.all(urls.map((url) => fetch(url)));
 
   if (responses.some((response) => !response.ok)) {
-    set({ characters: [] });
-    set({ info: null });
-    set({ totalPages: 0 });
+    useCharacters.setState({ characters: [], info: null, totalPages: 0 });
 
     return;
   }
@@ -119,9 +118,7 @@ export async function getCharacters() {
   const allCharacters = data.flatMap((page) => (page.results ? page.results : []));
   const allInfo = data[0].info;
 
-  useCharacters.setState({ characters: allCharacters });
-  useCharacters.setState({ info: allInfo });
-  useCharacters.setState({ totalPages: Math.ceil(allInfo?.count / 40) });
+  useCharacters.setState({ characters: allCharacters, info: allInfo, totalPages: Math.ceil(allInfo?.count / 40) });
 }
 
 export function resetFilters() {
