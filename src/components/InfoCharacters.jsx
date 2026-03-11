@@ -6,13 +6,20 @@ import StarIcon from "../icons/StarIcon";
 import StatIcon from "../icons/StatIcon";
 import getTopSpecies from "../utils/getTopSpecies";
 import { useCharacters } from "../store/characters";
-import { useFavoriteCharacters } from "../store/favoritesCharacters";
+import { useFavoriteCharacters, filteredFavChar } from "../store/favoritesCharacters";
+import { useShallow } from "zustand/shallow";
 
 export default function InfoCharacters() {
-  const characters = useCharacters((state) => state.characters);
-  const info = useCharacters((state) => state.info);
-  const favoritesCharacters = useFavoriteCharacters((state) => state.favoritesCharacters);
-  const isActive = useCharacters((state) => state.isActive);
+  const [characters, info, isActive] = useCharacters(
+    useShallow((state) => [state.characters, state.info, state.isActive]),
+  );
+
+  const [favoritesCharacters, filters, nameFavChar] = useFavoriteCharacters(
+    useShallow((state) => [state.favoritesCharacters, state.favCharFilters, state.nameFavChar]),
+  );
+
+  const filteredFavoritesCharacters = filteredFavChar(favoritesCharacters, filters, nameFavChar);
+
   const top3Label = getTopSpecies(characters);
 
   return (
@@ -21,14 +28,14 @@ export default function InfoCharacters() {
         className={styles["all-info-characters"]}
         Icon={HumansIcon}
         total={"Total"}
-        label={isActive ? favoritesCharacters.length : info?.count}
+        label={isActive ? filteredFavoritesCharacters.length : info?.count}
       />
 
       <StatItem
         className={styles["all-info-characters"]}
         Icon={EyeIcon}
         total={"Shown"}
-        label={isActive ? favoritesCharacters.length : characters.length}
+        label={isActive ? filteredFavoritesCharacters.length : characters.length}
       />
 
       <StatItem

@@ -12,12 +12,12 @@ import {
   setLocalFilter,
   setUrlPage,
 } from "../store/characters";
+import { useShallow } from "zustand/shallow";
 
 export default function SortingApiCharacters() {
   const { status, gender, species } = useCharacters((state) => state.apiFilters);
   const { sorting } = useCharacters((state) => state.localFilters);
-  const urlPage = useCharacters((state) => state.urlPage);
-  const isActive = useCharacters((state) => state.isActive);
+  const [urlPage, isActive] = useCharacters(useShallow((state) => [state.urlPage, state.isActive]));
 
   return (
     <div className={styles["select-container_sorting-characters"]}>

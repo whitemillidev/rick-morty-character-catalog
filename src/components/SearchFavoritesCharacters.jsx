@@ -1,14 +1,13 @@
 import ReloadIcon from "../icons/ReloadIcon";
 import SearchIcon from "../icons/SearchIcon";
-import { useFavoriteCharacters, setFavCharFilter, setNameFavChar } from "../store/favoritesCharacters";
-import { useCharacters } from "../store/characters";
+import { useFavoriteCharacters, setNameFavChar } from "../store/favoritesCharacters";
+import { useCharacters, setUrlPage } from "../store/characters";
 import styles from "../styles/character-catalog.module.css";
 import Button from "./Button";
 
 export default function SearchFavoritesCharacters() {
   const nameFavChar = useFavoriteCharacters((state) => state.nameFavChar);
   const urlPage = useCharacters((state) => state.urlPage);
-  const setUrlPage = useCharacters((state) => state.setUrlPage);
 
   return (
     <div className={styles["search-container"]}>

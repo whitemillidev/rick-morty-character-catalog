@@ -4,7 +4,7 @@ import styles from "../styles/character-catalog.module.css";
 import CharactersCard from "./CharactersCard";
 import { useShallow } from "zustand/shallow";
 
-function select(state) {
+function selectCharacters(state) {
   if (state.localFilters.sorting === "Name A-Z") {
     return state.characters.toSorted((a, b) => a.name.localeCompare(b.name));
   }
@@ -14,8 +14,8 @@ function select(state) {
   return state.characters;
 }
 
-export default function ApiCharactersList({ handleFavoriteClick, handleActiveCard }) {
-  const characters = useCharacters(useShallow(select));
+export default function ApiCharactersList() {
+  const characters = useCharacters(useShallow(selectCharacters));
 
   useEffect(() => {
     window.scrollTo({
@@ -34,14 +34,7 @@ export default function ApiCharactersList({ handleFavoriteClick, handleActiveCar
         <div className={styles["error_characters-undefined"]}>Characters not found</div>
       ) : (
         characters.map((character) => {
-          return (
-            <CharactersCard
-              key={character.id}
-              character={character}
-              handleFavoriteClick={handleFavoriteClick}
-              handleActiveCard={handleActiveCard}
-            />
-          );
+          return <CharactersCard key={character.id} character={character} />;
         })
       )}
     </div>

@@ -3,13 +3,13 @@ import StarIcon from "../icons/StarIcon";
 import Button from "./Button";
 import { setFavoritesCharacters, useFavoriteCharacters } from "../store/favoritesCharacters";
 import { useCharacters, setActiveCard } from "../store/characters";
+import { useShallow } from "zustand/shallow";
 
 export default function CharactersCard({ character }) {
-  const characters = useCharacters((state) => state.characters);
+  const [characters, activeCard] = useCharacters(useShallow((state) => [state.characters, state.activeCard]));
   const status = character.status.toLowerCase();
   const favoritesCharacters = useFavoriteCharacters((state) => state.favoritesCharacters);
   const isFavorite = favoritesCharacters.some((favChar) => favChar.id === character.id);
-  const activeCard = useCharacters((state) => state.activeCard);
 
   function handleActiveCard(id) {
     if (activeCard?.id === id) {
@@ -58,7 +58,7 @@ export default function CharactersCard({ character }) {
         {character.status}
       </span>
 
-      <div className={styles[""]}>
+      <div>
         <span className={styles["character-card_name"]}>{character.name}</span>
         <span className={styles["character-card_gender"]}>
           {character.species} • {character.gender}

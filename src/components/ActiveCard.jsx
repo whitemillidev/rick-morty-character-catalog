@@ -8,8 +8,12 @@ import ClosedIcon from "../icons/ClosedIcon";
 import Button from "./Button";
 import { setActiveCard, useCharacters } from "../store/characters";
 
-export default function ActiveCard({ handleClosedActiveCard }) {
+export default function ActiveCard() {
   const activeCard = useCharacters((state) => state.activeCard);
+
+  if (!activeCard) {
+    return null;
+  }
 
   return (
     <div className={activeCard === null ? styles["active-card-hidden"] : styles["active-card"]}>

@@ -1,3 +1,4 @@
+import { useShallow } from "zustand/shallow";
 import ReloadIcon from "../icons/ReloadIcon";
 import SearchIcon from "../icons/SearchIcon";
 import { useCharacters, setName, setUrlPage } from "../store/characters";
@@ -5,8 +6,7 @@ import styles from "../styles/character-catalog.module.css";
 import Button from "./Button";
 
 export default function SearcApihCharacters() {
-  const name = useCharacters((state) => state.name);
-  const urlPage = useCharacters((state) => state.urlPage);
+  const [name, urlPage] = useCharacters(useShallow((state) => [state.name, state.urlPage]));
 
   return (
     <div className={styles["search-container"]}>

@@ -4,12 +4,12 @@ import ArrowRightIcon from "../icons/ArrowRightIcon";
 import ArrowLeftIcon from "../icons/ArrowLeftIcon";
 import Button from "./Button";
 import { useCharacters, setUrlPage } from "../store/characters";
+import { useShallow } from "zustand/shallow";
 
 export default function Pagination() {
-  const characters = useCharacters((state) => state.characters);
-  const isActive = useCharacters((state) => state.isActive);
-  const urlPage = useCharacters((state) => state.urlPage);
-  const totalPages = useCharacters((state) => state.totalPages);
+  const [characters, isActive, urlPage, totalPages] = useCharacters(
+    useShallow((state) => [state.characters, state.isActive, state.urlPage, state.totalPages]),
+  );
 
   return (
     <div

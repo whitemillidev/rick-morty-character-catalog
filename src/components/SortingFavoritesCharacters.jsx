@@ -6,12 +6,21 @@ import ReloadIcon from "../icons/ReloadIcon";
 import { useFavoriteCharacters, setFavCharFilter, resetFilters } from "../store/favoritesCharacters";
 import { statusOptions, genderOptions, speciesOptions, sortingOptions } from "../store/favoritesCharacters";
 import { useCharacters, setIsActive } from "../store/characters";
+import { useShallow } from "zustand/shallow";
 
 export default function SortingFavoritesCharacters() {
   const isActive = useCharacters((state) => state.isActive);
-  const { favCharStatus, favCharGender, favCharSpecies, favCharSorting } = useFavoriteCharacters(
-    (state) => state.favCharFilters,
+  const favoritesCharacters = useFavoriteCharacters((state) => state.favoritesCharacters);
+  const [favCharStatus, favCharGender, favCharSpecies, favCharSorting] = useFavoriteCharacters(
+    useShallow((state) => [
+      state.favCharFilters.favCharStatus,
+      state.favCharFilters.favCharGender,
+      state.favCharFilters.favCharSpecies,
+      state.favCharFilters.favCharSorting,
+    ]),
   );
+
+  console.log(favoritesCharacters);
 
   return (
     <div className={styles["select-container_sorting-characters"]}>
