@@ -5,6 +5,7 @@
   position: relative;
   margin: 0;
   padding: 0;
+  /* background-color: #040609; */
 }
 
 .app_header {
@@ -163,6 +164,22 @@
   padding: 7px;
   border: 1px solid #6161617c;
   border-radius: 7px;
+}
+
+.theme_btn {
+  height: 35px;
+  background: transparent;
+  padding: 7px;
+  border: 1px solid #6161617c;
+  border-radius: 7px;
+  transition: background-color 0.2s ease;
+
+  &:hover {
+    cursor: pointer;
+    background-color: #57cb60;
+    outline: none;
+    color: #000000;
+  }
 }
 
 .search-container {
