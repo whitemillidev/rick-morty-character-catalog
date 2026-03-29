@@ -4,6 +4,8 @@ import SearchIcon from "../icons/SearchIcon";
 import { useCharacters, setName, setUrlPage } from "../store/characters";
 import styles from "../styles/character-catalog.module.css";
 import Button from "./Button";
+import SunIcon from "../icons/SunIcon";
+import MoonIcon from "../icons/MoonIcon";
 
 export default function SearcApihCharacters() {
   const [name, urlPage] = useCharacters(useShallow((state) => [state.name, state.urlPage]));
@@ -33,6 +35,11 @@ export default function SearcApihCharacters() {
           if (urlPage > 1) setUrlPage(1);
           setName("");
         }}
+      />
+      <Button
+        btnClassName={styles["theme_btn"]}
+        Icon={SunIcon}
+        onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
       />
     </div>
   );
