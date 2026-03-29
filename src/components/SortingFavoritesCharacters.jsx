@@ -20,8 +20,6 @@ export default function SortingFavoritesCharacters() {
     ]),
   );
 
-  console.log(favoritesCharacters);
-
   return (
     <div className={styles["select-container_sorting-characters"]}>
       <SelectItem
