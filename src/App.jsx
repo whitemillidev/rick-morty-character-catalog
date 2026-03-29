@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import styles from "./styles/character-catalog.module.css";
 import InfoCharacters from "./components/InfoCharacters";
 import SearchCharacters from "./components/SearchCharacters";
@@ -6,6 +6,11 @@ import SortingCharacters from "./components/SortingCharacters";
 import ActiveCard from "./components/ActiveCard";
 import Pagination from "./components/Pagination";
 import CharactersList from "./components/CharactersList";
+import TestUseTheme from "./test-hooks-components/TestUseTheme";
+import TestUseDocumentTitle from "./test-hooks-components/TestUseDocumentTitle";
+import TestUseToggle from "./test-hooks-components/TestUseToggle";
+import TestUseDebounce from "./test-hooks-components/TestUseDebounce";
+import TestUseThrottle from "./test-hooks-components/TestUseThrottle";
 
 export default function RickMortyCharacterCatalog() {
   return (
@@ -23,6 +28,11 @@ export default function RickMortyCharacterCatalog() {
 
       <ActiveCard />
       <Pagination />
+      {/* <TestUseTheme /> */}
+      {/* <TestUseDocumentTitle /> */}
+      {/* <TestUseToggle /> */}
+      {/* <TestUseDebounce /> */}
+      <TestUseThrottle />
     </div>
   );
 }
