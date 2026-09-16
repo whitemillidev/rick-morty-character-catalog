@@ -3,6 +3,6 @@ import react from "@vitejs/plugin-react";
 
 // https://vite.dev/config/
 export default defineConfig({
-  base: `/rick-morty-character-catalog/`,
+  base: "/Rick-Morty-character-catalog-/",
   plugins: [react()],
 });
