@@ -32,7 +32,7 @@ export default function RickMortyCharacterCatalog() {
       {/* <TestUseDocumentTitle /> */}
       {/* <TestUseToggle /> */}
       {/* <TestUseDebounce /> */}
-      <TestUseThrottle />
+      {/* <TestUseThrottle /> */}
     </div>
   );
 }
