@@ -146,6 +146,7 @@
   height: 35px;
   background: transparent;
   padding: 7px;
+  color: #ffffff;
   border: 1px solid #6161617c;
   border-radius: 7px;
   transition: background-color 0.2s ease;
@@ -160,6 +161,7 @@
 
 .reset-btn-disabled {
   height: 35px;
+  color: #868686;
   background: transparent;
   padding: 7px;
   border: 1px solid #6161617c;
@@ -170,6 +172,7 @@
   height: 35px;
   background: transparent;
   padding: 7px;
+  color: #ffffff;
   border: 1px solid #6161617c;
   border-radius: 7px;
   transition: background-color 0.2s ease;
@@ -199,6 +202,7 @@
   border: 1px solid #6161617c;
   border-radius: 7px;
   font-weight: 700;
+  color: #ffffff;
 
   &:hover {
     cursor: pointer;
@@ -229,6 +233,7 @@
   font-size: 17px;
   background: transparent;
   border: 1px solid #6161617c;
+  color: #ffffff;
   border-radius: 7px;
   cursor: pointer;
 
@@ -260,6 +265,7 @@
   padding: 10px 10px 10px 40px;
   font-weight: 700;
   font-size: 17px;
+  color: #ffffff;
   background: transparent;
   border: 1px solid #6161617c;
   border-radius: 7px;
@@ -334,6 +340,7 @@
   height: 35px;
   border-radius: 50%;
   cursor: pointer;
+  color: #ffffff;
   background-color: #383838;
   border: none;
   position: absolute;
@@ -434,6 +441,7 @@
   background: transparent;
   border: none;
   cursor: pointer;
+  color: #ffffff;
   transition: background-color ease-out 0.2s;
   border-radius: 10px;
 
@@ -624,6 +632,7 @@
 
 .disabled-btn {
   background: transparent;
+  color: #868686;
   border: 1px solid #6161617c;
   border-radius: 7px;
 }
