@@ -123,6 +123,7 @@
   width: 100%;
   padding: 10px 10px 10px 35px;
   height: 35px;
+  color: #ffffff;
   background: none;
   border: 1px solid #6161617c;
   border-radius: 7px;
@@ -637,7 +638,6 @@
   border-radius: 7px;
 }
 
-
 /* =========================
    MOBILE ADAPTATION
    ========================= */
@@ -660,10 +660,6 @@
     padding: 90px 12px 20px 12px;
   }
 
-  /* =========================
-     STATISTICS
-     ========================= */
-
   .info-characters_container {
     flex-direction: column;
     gap: 10px;
@@ -677,10 +673,6 @@
     min-height: 65px;
     box-sizing: border-box;
   }
-
-  /* =========================
-     SEARCH
-     ========================= */
 
   .search-container {
     width: 100%;
@@ -705,10 +697,6 @@
     height: 40px;
   }
 
-  /* =========================
-     SORTING / FILTERS
-     ========================= */
-
   .select-container_sorting-characters {
     flex-direction: column;
     gap: 10px;
@@ -730,10 +718,6 @@
     font-size: 15px;
   }
 
-  /* =========================
-     CHARACTERS LIST
-     ========================= */
-
   .characters-list {
     width: 100%;
     max-width: none;
@@ -741,10 +725,6 @@
     grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 10px;
   }
-
-  /* =========================
-     CHARACTER CARD
-     ========================= */
 
   .characters-card {
     width: 100%;
@@ -789,10 +769,6 @@
     font-size: 11px;
     padding: 1px 7px;
   }
-
-  /* =========================
-     ACTIVE CHARACTER CARD
-     ========================= */
 
   .active-card {
     position: fixed;
@@ -847,18 +823,10 @@
     flex-shrink: 0;
   }
 
-  /* =========================
-     PAGINATION
-     ========================= */
-
   .pagination-container {
     margin: 20px auto 80px auto;
     gap: 10px;
   }
-
-  /* =========================
-     ERRORS
-     ========================= */
 
   .error_characters-undefined {
     margin: 60px auto;
